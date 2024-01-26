@@ -1,5 +1,5 @@
 # PAG
-This repo provides the source code and checkpoints for our paper [PAG]()
+This repo provides the source code and checkpoints for our paper [Planning Ahead in Generative Retrieval: Guiding Autoregressive Generation through Simultaneous Decoding]()
 
 ## Package installation
 - pip install -r requirements.txt 
