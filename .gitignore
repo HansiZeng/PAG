@@ -1,6 +1,7 @@
 # customized
 wandb/
 data/
+sbatch_jobs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -13,10 +13,10 @@ class ModelArguments:
 class Arguments:
     teacher_score_path: Optional[str] = field(
         default=None)
-    collection_path: str = field(default="/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/full_collection")
-    queries_path: str = field(default="/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/train_queries/queries")
-    qrels_path: str = field(default="/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/train_queries/qrels.json")
-    output_dir: str = field(default="/home/ec2-user/quic-efs/user/hansizeng/work/t5_pretrainer/t5_pretrainer/experiments/")
+    collection_path: str = field(default="./data/data/msmarco/full_collection")
+    queries_path: str = field(default="./data/data/msmarco/train_queries/queries")
+    qrels_path: str = field(default="./data/data/msmarco/train_queries/qrels.json")
+    output_dir: str = field(default="./data/t5_pretrainer/t5_pretrainer/experiments/")
     example_path: Optional[str] = field(default=None)
     pseudo_queries_to_docid_path: Optional[str] = field(default=None)
     pseudo_queries_to_mul_docid_path: Optional[str] = field(default=None)
@@ -112,7 +112,7 @@ class Arguments:
 
 @dataclass
 class EvalArguments:
-    collection_path: str = field(default="/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/full_collection")
+    collection_path: str = field(default="./data/data/msmarco/full_collection")
     pretrained_path: str = field(default="")
     index_dir: str = field(default="")
     mmap_dir: str = field(default="")
@@ -125,15 +125,15 @@ class EvalArguments:
     index_retrieve_batch_size: int = field(default=256)
     local_rank: int = field(default=-1)
     task: str = field(default="")
-    q_collection_paths: List[str] = field(default_factory=lambda: ["/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/TREC_DL_2019/queries_2019/",
-                          "/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/TREC_DL_2020/queries_2020/",
-                          "/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/dev_queries/"])
+    q_collection_paths: List[str] = field(default_factory=lambda: ["./data/data/msmarco/TREC_DL_2019/queries_2019/",
+                          "./data/data/msmarco/TREC_DL_2020/queries_2020/",
+                          "./data/data/msmarco/dev_queries/"])
     eval_qrel_path: List[str] = field(default_factory=lambda: [
-        "/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/dev_qrel.json",
-        "/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/TREC_DL_2019/qrel.json",
-        "/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/TREC_DL_2019/qrel_binary.json",
-        "/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/TREC_DL_2020/qrel.json",
-        "/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/TREC_DL_2020/qrel_binary.json"
+        "./data/data/msmarco/dev_qrel.json",
+        "./data/data/msmarco/TREC_DL_2019/qrel.json",
+        "./data/data/msmarco/TREC_DL_2019/qrel_binary.json",
+        "./data/data/msmarco/TREC_DL_2020/qrel.json",
+        "./data/data/msmarco/TREC_DL_2020/qrel_binary.json"
     ])
     eval_metric: List[List[str]] = field(default_factory=lambda: [
         ["mrr_10", "recall"],
@@ -152,20 +152,20 @@ class EvalArguments:
     out_qid_to_smtid_dir: Optional[str] = field(default=None)
     centroid_path: Optional[str] = field(default=None)
     centroid_idx: Optional[int] = field(default=None)
-    dev_queries_path: str = field(default="/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/dev_queries/raw.tsv")
-    dev_qrels_path: str = field(default="/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/dev_qrel.json")
+    dev_queries_path: str = field(default="./data/data/msmarco/dev_queries/raw.tsv")
+    dev_qrels_path: str = field(default="./data/data/msmarco/dev_qrel.json")
     retrieve_json_path: str = field(default=None)
     codebook_num: int = field(default=8)
     codebook_bits: int = field(default=8)
     eval_run_paths: List[str] = field(default_factory=lambda: {
-        "MSMARCO":"/home/ec2-user/quic-efs/user/hansizeng/work/t5_pretrainer/t5_pretrainer/experiments-full-t5seq-aq/t5_docid_gen_encoder_1/out/MSMARCO/run.json",
-        "TREC_DL_2019": "/home/ec2-user/quic-efs/user/hansizeng/work/t5_pretrainer/t5_pretrainer/experiments-full-t5seq-aq/t5_docid_gen_encoder_1/out/TREC_DL_2019/run.json",
-        "TREC_DL_2020": "/home/ec2-user/quic-efs/user/hansizeng/work/t5_pretrainer/t5_pretrainer/experiments-full-t5seq-aq/t5_docid_gen_encoder_1/out/TREC_DL_2020/run.json"
+        "MSMARCO":"./data/t5_pretrainer/t5_pretrainer/experiments-full-t5seq-aq/t5_docid_gen_encoder_1/out/MSMARCO/run.json",
+        "TREC_DL_2019": "./data/t5_pretrainer/t5_pretrainer/experiments-full-t5seq-aq/t5_docid_gen_encoder_1/out/TREC_DL_2019/run.json",
+        "TREC_DL_2020": "./data/t5_pretrainer/t5_pretrainer/experiments-full-t5seq-aq/t5_docid_gen_encoder_1/out/TREC_DL_2020/run.json"
     })
     #eval_run_paths: List[str] = field(default_factory=lambda: {
-    #    "MSMARCO":"/home/ec2-user/quic-efs/user/hansizeng/work/t5_pretrainer/t5_pretrainer/experiments-1M-t5seq-aq//t5seq_aq_encoder_seq2seq_1_lng_knp_self_mnt_32_dcy_2/out_docid_from_sub_4_top2000/MSMARCO/run.json",
-    #    "TREC_DL_2019": "/home/ec2-user/quic-efs/user/hansizeng/work/t5_pretrainer/t5_pretrainer/experiments-1M-t5seq-aq/t5seq_aq_encoder_seq2seq_1_lng_knp_self_mnt_32_dcy_2/out_docid_from_sub_4_top2000/TREC_DL_2019/run.json",
-    #    "TREC_DL_2020": "/home/ec2-user/quic-efs/user/hansizeng/work/t5_pretrainer/t5_pretrainer/experiments-1M-t5seq-aq/t5seq_aq_encoder_seq2seq_1_lng_knp_self_mnt_32_dcy_2/out_docid_from_sub_4_top2000/TREC_DL_2020/run.json"
+    #    "MSMARCO":"./data/t5_pretrainer/t5_pretrainer/experiments-1M-t5seq-aq//t5seq_aq_encoder_seq2seq_1_lng_knp_self_mnt_32_dcy_2/out_docid_from_sub_4_top2000/MSMARCO/run.json",
+    #    "TREC_DL_2019": "./data/t5_pretrainer/t5_pretrainer/experiments-1M-t5seq-aq/t5seq_aq_encoder_seq2seq_1_lng_knp_self_mnt_32_dcy_2/out_docid_from_sub_4_top2000/TREC_DL_2019/run.json",
+    #    "TREC_DL_2020": "./data/t5_pretrainer/t5_pretrainer/experiments-1M-t5seq-aq/t5seq_aq_encoder_seq2seq_1_lng_knp_self_mnt_32_dcy_2/out_docid_from_sub_4_top2000/TREC_DL_2020/run.json"
     #})
     batch_size: Optional[int] = field(default=64)
     topk: int = field(default=200)
@@ -193,16 +193,16 @@ class EvalArguments:
     
 @dataclass
 class RerankArguments:
-    collection_path: str = field(default="/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/full_collection")
+    collection_path: str = field(default="./data/data/msmarco/full_collection")
     out_dir: str = field(default="")
     model_name_or_path: str = field(default="cross-encoder/ms-marco-MiniLM-L-6-v2")
     max_length: int = field(default=256)
     batch_size: int = field(default=64)
     #q_collection_paths: List[str] = field(default_factory=lambda: [
-    #    "/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/train_queries/labeled_queries/"
+    #    "./data/data/msmarco/train_queries/labeled_queries/"
     #])
     #run_json_paths: List[str] = field(default_factory=lambda: [
-    #    "/home/ec2-user/quic-efs/user/hansizeng/work/t5_pretrainer/t5_pretrainer/experiments/t5model_encoder_marginmse_again/out/MSMARCO_TRAIN/run_with_qrel.json"
+    #    "./data/t5_pretrainer/t5_pretrainer/experiments/t5model_encoder_marginmse_again/out/MSMARCO_TRAIN/run_with_qrel.json"
     #])
     q_collection_path: str = field(default="")
     run_json_path: str = field(default="")
@@ -217,13 +217,13 @@ class RerankArguments:
     docid_to_smtid_path: str = field(default="")
     docid_to_tokenids_path: str = field(default="")
     pretrained_path: str = field(default="")
-    dev_queries_path: str = field(default="/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/dev_queries/raw.tsv")
-    dev_qrels_path: str = field(default="/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/dev_qrel.json")
-    qid_docids_path: str = field(default="/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/bm25_run/top1000.dev.rerank.json")
+    dev_queries_path: str = field(default="./data/data/msmarco/dev_queries/raw.tsv")
+    dev_qrels_path: str = field(default="./data/data/msmarco/dev_qrel.json")
+    qid_docids_path: str = field(default="./data/data/msmarco/bm25_run/top1000.dev.rerank.json")
     query_to_smtid_tokenizer_type: str = field(default="t5-base")
     qid_smtid_rank_path: str = field(default="")
-    train_qrels_path: str = field(default="/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/train_queries/qrels.json")
-    train_queries_path: str = field(default="/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco/train_queries/queries/raw.tsv")
+    train_qrels_path: str = field(default="./data/data/msmarco/train_queries/qrels.json")
+    train_queries_path: str = field(default="./data/data/msmarco/train_queries/queries/raw.tsv")
     qid_to_reldocid_hard_docids_path: Optional[str] = field(default=None)
     eval_qrel_path: Optional[str] = field(default=None)
     eval_metrics: Optional[str] = field(default=None)

@@ -131,10 +131,10 @@ if __name__ == "__main__":
     from transformers.generation_logits_process import LogitsProcessorList
     from tqdm import tqdm
 
-    root_dir = "/home/ec2-user/quic-efs/user/hansizeng/work/t5_pretrainer/t5_pretrainer"
+    root_dir = "./data/t5_pretrainer/t5_pretrainer"
     docid_to_smtid_path = os.path.join(root_dir, "experiments-1Mtree-t5seq-encoder-1000/t5_docid_gen_encoder_2_0/btree_1000/docid_to_smtid.json")
     pretrained_path = os.path.join(root_dir, "experiments-1Mtree-t5seq-encoder-1000/t5_docid_gen_encoder_2_1/checkpoint")
-    dev_query_dir = "/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco-1M/dev_queries/"
+    dev_query_dir = "./data/work/data/msmarco-1M/dev_queries/"
 
     with open(docid_to_smtid_path) as fin:
         docid_to_smtids = ujson.load(fin)

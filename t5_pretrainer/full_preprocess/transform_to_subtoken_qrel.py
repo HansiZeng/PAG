@@ -2,10 +2,10 @@ import ujson
 import os 
 
 sub_token = 8
-model_dir = "/home/ec2-user/quic-efs/user/hansizeng/work/term_generative_retriever/experiments-full-lexical-ripor/t5-full-dense-1-5e-4-12l/"
+model_dir = "./data/experiments-full-lexical-ripor/t5-full-dense-1-5e-4-12l/"
 docid_to_smtids_path = os.path.join(model_dir, "aq_smtid/docid_to_tokenids.json")
 
-data_root_dir = "/home/ec2-user/quic-efs/user/hansizeng/work/data/msmarco-full"
+data_root_dir = "./data/msmarco-full"
 in_qrels_paths = [os.path.join(data_root_dir, "dev_qrel.json"),
                   os.path.join(data_root_dir, "TREC_DL_2019", "qrel_binary.json"),
                   os.path.join(data_root_dir, "TREC_DL_2019", "qrel.json"),

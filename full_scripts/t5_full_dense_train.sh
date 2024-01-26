@@ -9,11 +9,11 @@ finetune_step=bm25_neg
 
 lr=5e-4
 output_dir="./data/$experiment_dir/"
-if [ finetune_step = bm25_neg ]; then 
+if [ finetune_step=bm25_neg ]; then 
         pretrained_path=t5-base
         teacher_score_path=./data/msmarco-full/bm25_run/qrel_added_qid_docids_teacher_scores.train.json
         run_name=t5-full-dense-0-"$lr"-12l
-elif [ finetune_step = self_neg ]; then 
+elif [ finetune_step=self_neg ]; then 
         model_dir=./data/experiments-full-lexical-ripor/t5-full-dense-0-5e-4-12l/
         pretrained_path=$model_dir/checkpoint
         teacher_score_path=$model_dir/out/MSMARCO_TRAIN/qrel_added_qid_docids_teacher_scores.train.json
@@ -23,7 +23,7 @@ else
         exit 1
 fi
 
-python -m torch.distributed.launch --nproc_per_node=8 -m t5_pretrainer.main \
+python -m torch.distributed.launch --nproc_per_node=4 -m t5_pretrainer.main \
         --epochs=50 \
         --run_name=$run_name \
         --learning_rate=$lr \

@@ -14,7 +14,7 @@ for max_new_token in [8]:
     for smtid, factor in smitd_to_factor.items():
         print("smtid: ", smtid, "factor: ", factor)
 
-    root_dir = "/home/ec2-user/quic-efs/user/hansizeng/work/term_generative_retriever/experiments-full-lexical-ripor/ripor_seq2seq_1"
+    root_dir = "./data/experiments-full-lexical-ripor/ripor_seq2seq_1"
     source_example_path = os.path.join(root_dir, f"sub_smtid_train_decay2/qid_smtids_scores_{max_new_token}.train.json")
     out_dir = os.path.join(root_dir, "lng_knp_sub_smtid_train_decay2")
 

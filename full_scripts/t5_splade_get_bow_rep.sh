@@ -3,8 +3,8 @@
 collection_path=./data/msmarco-full/full_collection/
 experiment_dir=experiments-splade
 
-export CUDA_VISIBLE_DEVICES=4
-model_dir="/home/ec2-user/quic-efs/user/hansizeng/work/term_generative_retriever/$experiment_dir/t5-splade-0-12l"
+export CUDA_VISIBLE_DEVICES=0
+model_dir="./data/$experiment_dir/t5-splade-0-12l"
 pretrained_path=$model_dir/checkpoint
 
 out_dir=$model_dir/top_bow

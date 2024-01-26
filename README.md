@@ -1,5 +1,5 @@
-# GD-RIPOR
-This repo provides the source code and checkpoints for our paper [GD-RIPOR]()
+# PAG
+This repo provides the source code and checkpoints for our paper [PAG]()
 
 ## Package installation
 - pip install -r requirements.txt 
@@ -7,6 +7,12 @@ This repo provides the source code and checkpoints for our paper [GD-RIPOR]()
 - conda install -c conda-forge faiss-gpu 
 
 ## Download Files
+All necessary files and checkpoint are in [PAG-data](https://drive.google.com/drive/u/2/folders/1ajlt9-06OynjWnTmLFFpkmbyMg7PxY_W).
+- If only want to do inference, you only need to download the following files or folders:
+    - `experiments-full-lexical-ripor/lexical_ripor_direct_lng_knp_seq2seq_1`
+    - `experiments-full-lexical-ripor/t5-full-dense-1-5e-4-12l/aq_smtid/docid_to_tokenids.json`
+    - `experiments-splade/t5-splade-0-12l/top_bow/docid_to_tokenids.json`
+    - `msmarco-full/full_collection`, `msmarco-full/TREC_DL_2019/`, `msmarco-full/TREC_DL_2020/queries_2020/`, `msmarco-full/dev_qrel.json`
 
 ## Inference 
 We use a single 80GB A100 to run the script. Feel free to use other types of GPUs, such as V100, but it would be slower.

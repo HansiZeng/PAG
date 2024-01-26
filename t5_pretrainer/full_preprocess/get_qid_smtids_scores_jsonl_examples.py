@@ -13,7 +13,7 @@ for max_new_token in [4, 8]:
     factor = decay_to_factor[decay][max_new_token]
     print("factor: ", factor, "max_new_token: ", max_new_token, "keep_top100: ", keep_top100)
 
-    root_dir = "/home/ec2-user/quic-efs/user/hansizeng/work/term_generative_retriever/experiments-full-lexical-ripor/"
+    root_dir = "./data/experiments-full-lexical-ripor/"
     original_qid_smtid_rerank_path = os.path.join(root_dir, f"t5-full-dense-1-5e-4-12l/sub_smtid_{max_new_token}_out/qid_smtid_docids_teacher_score.train.json")
     self_qid_smtid_rerank_path = os.path.join(root_dir, f"ripor_seq2seq_1/sub_smtid_{max_new_token}_out/qid_smtid_docids_teacher_score.train.json")
     out_dir = os.path.join(root_dir, f"ripor_seq2seq_1/sub_smtid_train_decay{decay}/")

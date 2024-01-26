@@ -3,9 +3,9 @@ import os
 import numpy as np
 
 for max_new_token in [4, 8]:
-    docid_to_smtid_path = "/home/ec2-user/quic-efs/user/hansizeng/work/term_generative_retriever/experiments-full-lexical-ripor/t5-full-dense-1-5e-4-12l/aq_smtid/docid_to_tokenids.json"
-    teacher_score_path = "/home/ec2-user/quic-efs/user/hansizeng/work/term_generative_retriever/experiments-full-lexical-ripor/t5-full-dense-1-5e-4-12l/out/MSMARCO_TRAIN/qrel_added_qid_docids_teacher_scores.train.json"
-    out_dir=f"/home/ec2-user/quic-efs/user/hansizeng/work/term_generative_retriever/experiments-full-lexical-ripor/t5-full-dense-1-5e-4-12l/sub_smtid_{max_new_token}_out/"
+    docid_to_smtid_path = "./data/experiments-full-lexical-ripor/t5-full-dense-1-5e-4-12l/aq_smtid/docid_to_tokenids.json"
+    teacher_score_path = "./data/experiments-full-lexical-ripor/t5-full-dense-1-5e-4-12l/out/MSMARCO_TRAIN/qrel_added_qid_docids_teacher_scores.train.json"
+    out_dir=f"./data/experiments-full-lexical-ripor/t5-full-dense-1-5e-4-12l/sub_smtid_{max_new_token}_out/"
 
     if not os.path.exists(out_dir):
         os.mkdir(out_dir)
