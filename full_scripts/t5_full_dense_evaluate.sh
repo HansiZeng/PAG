@@ -13,17 +13,17 @@ if [ $task = "all_pipeline" ]; then
     index_dir=$model_dir/index
     out_dir=$model_dir/out
 
-    #python -m torch.distributed.launch --nproc_per_node=8 -m t5_pretrainer.evaluate \
-    #    --pretrained_path=$pretrained_path \
-    #    --index_dir=$index_dir \
-    #    --out_dir=$out_dir \
-    #    --task=index \
-    #    --encoder_type=t5seq_pretrain_encoder \
-    #    --collection_path=$collection_path
+    python -m torch.distributed.launch --nproc_per_node=8 -m t5_pretrainer.evaluate \
+        --pretrained_path=$pretrained_path \
+        --index_dir=$index_dir \
+        --out_dir=$out_dir \
+        --task=index \
+        --encoder_type=t5seq_pretrain_encoder \
+        --collection_path=$collection_path
 
-    #python -m t5_pretrainer.evaluate \
-    #    --task=index_2 \
-    #    --index_dir=$index_dir 
+    python -m t5_pretrainer.evaluate \
+        --task=index_2 \
+        --index_dir=$index_dir 
 
     python -m t5_pretrainer.evaluate \
         --task=dense_retrieve \
@@ -39,7 +39,7 @@ elif [ $task = "retrieve_train_queries" ]; then
 
     #export CUDA_VISIBLE_DEVICES=1
     # the model_dir should be changed every time
-    model_dir="./data/$experiment_dir/t5-full-dense-1-5e-4-12l"
+    model_dir="./data/$experiment_dir/t5-full-dense-0-5e-4-12l"
     pretrained_path=$model_dir/checkpoint
     index_dir=$model_dir/index
     out_dir=$model_dir/out

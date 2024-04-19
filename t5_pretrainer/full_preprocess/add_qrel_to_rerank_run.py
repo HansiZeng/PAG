@@ -10,7 +10,7 @@ teacher_score_path = "./data/msmarco-full/all_train_queries/qid_to_reldocid_to_s
 with open(teacher_score_path, "r") as fin:
     qid_to_reldocid_to_score = ujson.load(fin)
 
-experiment_names = ["t5-term-encoder-0-bow-128-12l"]
+experiment_names = ["t5-term-encoder-0-bow-12l"]
 for experiment_name in experiment_names:
     qid_to_rerank = {}
     rerank_path = "./term_generative_retriever/experiments-full-lexical-ripor/{}/out/MSMARCO_TRAIN/qid_docids_teacher_scores.train.json".format(experiment_name)

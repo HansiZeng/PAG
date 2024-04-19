@@ -5,14 +5,12 @@ collection_path=$data_root_dir/full_collection/
 #run_path="./data/msmarco-full/bm25_run/top100.marco.train.all.json"
 #out_dir="./data/msmarco-full/bm25_run/"
 
-root_dir="./data/experiments-full-lexical-ripor-t5-large"
+root_dir="./data/experiments-full-lexical-ripor"
 
-for experiment_dir in "t5-large-full-dense-0"
+for experiment_dir in "t5-full-dense-0-5e-4-12l"
 do
     run_path=$root_dir/$experiment_dir/out/MSMARCO_TRAIN/run.json
     out_dir=$root_dir/$experiment_dir/out/MSMARCO_TRAIN/
-    #run_path=$root_dir/$experiment_dir/lex_ret/MSMARCO_TRAIN/run.json
-    #out_dir=$root_dir/$experiment_dir/lex_ret/MSMARCO_TRAIN/
     q_collection_path=./data/msmarco-full/all_train_queries/train_queries
 
 

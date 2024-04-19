@@ -37,51 +37,48 @@ if [ $task == all_pipeline ]; then
 elif [ $task == retrieve_train_queries ]; then
     echo "run retrieve_train_queries task"
     # the model_dir should be changed every time
-    for bow_topk in 128
-    do  
-        # model path
-        model_dir="./data/$experiment_dir/t5-term-encoder-1-bow-$bow_topk-12l"
-        pretrained_path=$model_dir/checkpoint
+    # model path
+    model_dir="./data/$experiment_dir/t5-term-encoder-0-bow-12l"
+    pretrained_path=$model_dir/checkpoint
 
-        # docid_to_smtid
-        splade_dir="./data/experiments-splade/t5-splade-0-12l/"
-        docid_to_smtid_path=$splade_dir/top_bow_"$bow_topk"/docid_to_tokenids.json
+    # docid_to_smtid
+    splade_dir="./data/experiments-splade/t5-splade-0-12l/"
+    docid_to_smtid_path=$splade_dir/top_bow/docid_to_tokenids.json
 
-        out_dir=$model_dir/out
+    out_dir=$model_dir/out
 
-        python -m torch.distributed.launch --nproc_per_node=8 -m t5_pretrainer.evaluate \
-            --task=term_encoder_parallel_retrieve \
-            --pretrained_path=$pretrained_path \
-            --out_dir=$out_dir  \
-            --q_collection_paths='["./data/msmarco-full/all_train_queries/train_queries"]' \
-            --max_length=128 \
-            --topk=100 \
-            --eval_qrel_path=$eval_qrel_path \
-            --docid_to_smtid_path=$docid_to_smtid_path
+    python -m torch.distributed.launch --nproc_per_node=4 -m t5_pretrainer.evaluate \
+        --task=term_encoder_parallel_retrieve \
+        --pretrained_path=$pretrained_path \
+        --out_dir=$out_dir  \
+        --q_collection_paths='["./data/msmarco-full/all_train_queries/train_queries"]' \
+        --max_length=128 \
+        --topk=100 \
+        --eval_qrel_path=$eval_qrel_path \
+        --docid_to_smtid_path=$docid_to_smtid_path
 
-        python -m t5_pretrainer.evaluate \
-            --task=term_encoder_parallel_retrieve_2 \
-            --q_collection_paths='["./data/msmarco-full/all_train_queries/train_queries"]' \
-            --out_dir=$out_dir
+    python -m t5_pretrainer.evaluate \
+        --task=term_encoder_parallel_retrieve_2 \
+        --q_collection_paths='["./data/msmarco-full/all_train_queries/train_queries"]' \
+        --out_dir=$out_dir
 
-        # let's re-rank the run path
-        run_path=$model_dir/out/MSMARCO_TRAIN/run.json
-        out_dir=$model_dir/out/MSMARCO_TRAIN/
-        q_collection_path=./data/msmarco-full/all_train_queries/train_queries
+    # let's re-rank the run path
+    run_path=$model_dir/out/MSMARCO_TRAIN/run.json
+    out_dir=$model_dir/out/MSMARCO_TRAIN/
+    q_collection_path=./data/msmarco-full/all_train_queries/train_queries
 
-        python -m torch.distributed.launch --nproc_per_node=8 -m t5_pretrainer.rerank \
-            --task=rerank_for_create_trainset \
-            --run_json_path=$run_path \
-            --out_dir=$out_dir \
-            --collection_path=$collection_path \
-            --q_collection_path=$q_collection_path \
-            --json_type=json \
-            --batch_size=256
+    python -m torch.distributed.launch --nproc_per_node=4 -m t5_pretrainer.rerank \
+        --task=rerank_for_create_trainset \
+        --run_json_path=$run_path \
+        --out_dir=$out_dir \
+        --collection_path=$collection_path \
+        --q_collection_path=$q_collection_path \
+        --json_type=json \
+        --batch_size=256
 
-        python -m t5_pretrainer.rerank \
-            --task=rerank_for_create_trainset_2 \
-            --out_dir=$out_dir
-    done
+    python -m t5_pretrainer.rerank \
+        --task=rerank_for_create_trainset_2 \
+        --out_dir=$out_dir
 else 
     echo "Error: Unknown task."
     exit 1
