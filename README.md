@@ -7,7 +7,7 @@ This repo provides the source code and checkpoints for our paper [Planning Ahead
 - conda install -c conda-forge faiss-gpu 
 
 ## Download Files
-All necessary files and checkpoint are in [PAG-data](https://drive.google.com/drive/u/2/folders/1ajlt9-06OynjWnTmLFFpkmbyMg7PxY_W).
+All necessary files and checkpoint are in [PAG-data](https://drive.google.com/drive/folders/1q8FeHQ6nxPYpl1Thqw8mS-2ndzf7VZ9y?usp=sharing).
 If only want to do inference, you only need to download the following files or folders.
 - Trained model: 
     - `experiments-full-lexical-ripor/lexical_ripor_direct_lng_knp_seq2seq_1`
@@ -29,7 +29,7 @@ bash full_scripts/full_lexical_ripor_evaluate.sh
 All experiments are conducted 8x 40GB A100 GPUs. The whole training pipeline contains three stages: (1) Generative retrieval (GR) model  for set-based DocIDs. (2) GR model for sequence-based DocIDs. (3) Unified GR model for set-based & sequence-based DocIDs. Stages (1) and (2) can be train in parallel. 
 
 ### Stage 1: GR model for set-based DocIDs
-The stage contains 2 phases: pre-training and fine-tunining. For pre-training, we train the GR model as a sparse encoder, then we select the top U words from the sparse vector for each document $d$ to form the set-based DocID, and we term it as $\{w^d_1, \ldots w^d_U \}$. For fine-tuning phase, we train the GR model for set-based DocID prediction.
+The stage contains 2 phases: pre-training and fine-tunining. For pre-training, we train the GR model as a sparse encoder, then we select the top m words from the sparse vector for each document $d$ to form the set-based DocID, and we term it as $\{t^d_1, \ldots t^d_m \}$. For fine-tuning phase, we train the GR model for set-based DocID prediction.
 
 #### Pre-training:
 Run script for training the sparse encoder: 
@@ -49,7 +49,7 @@ For step 1 training:
 full_scripts/t5_full_term_encoder_train.sh
 ```
 For step 2 training: 
-- we first need to mine and score the hard negative documents for queries using the trained model in step 1 (named `t5-term-encoder-0-bow-12l`). To do the hard negative mining and scoring using the cross-encoder, run the following script (Remember to set `task="retrieve_train_queries"` in line 3 of the script.):
+- We need to mine the negative documents using step 1 model (named as `t5-term-encoder-0-bow-12l`) and assign the teacher score using a cross-encoder for each query-document pair. The procedures are integreted in the script `full_scripts/t5_full_term_encoder_evaluate.sh`, when we set `task="retrieve_train_queries"` in line 3 of the script:
 ```
 bash full_scripts/t5_full_term_encoder_evaluate.sh
 ```
